@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 	{% if profile %}
 		<div class="container text-center">
@@ -8,7 +8,8 @@
 					<h1>{{ profile.user.username }}'s Profile</h1><br/>
                     {% if yeets %}
                         {% for yeet in yeets %}
-            
+                    
+              
                         <div class="card" style="background-color: rgb(179, 252, 220);">
                             <div class="card-body">
                                 <strong>{{yeet.body}}<br/></strong>
@@ -23,6 +24,10 @@
                     {% endif %}
 				</div>
 				<div class="col-4" style="margin-top: 50px;">
+                    {% if profile.profile_image %}
+                    <img src="{{ profile.profile_image.url }}" style="width: 200px; margin-bottom: 20px;">
+                    <br/>
+                    {% endif %}
 					<div class="card">
 						<h5 class="card-header">Follows</h5>
 						<div class="card-body">

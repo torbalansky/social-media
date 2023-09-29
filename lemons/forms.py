@@ -1,7 +1,15 @@
 from django import forms
-from .models import Yeet
+from .models import Yeet, Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+
+#Profile additions
+class ProfilePictureForm(forms.ModelForm):
+    profile_image = forms.ImageField(label="Profile Picture")
+
+    class Meta:
+        model= Profile
+        fields = ('profile_image', )
 
 class YeetForm(forms.ModelForm):
     body = forms.CharField(required=True,
