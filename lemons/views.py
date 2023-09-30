@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Profile, Yeet
 from .forms import YeetForm, SignUpForm, ProfilePictureForm
@@ -105,5 +105,18 @@ def update_user(request):
         
         return render(request, "update_user.html", {'user_form':user_form, 'profile_form':profile_form})
     else:
+        messages.success(request, ("You have to be logged in."))
+        return redirect('home')
+    
+def yeet_like(request, pk):
+    if request.user.is_authenticated:
+        yeet = get_object_or_404(Yeet, id=pk)
+        if yeet.likes.filter(id=request.user.id):
+            yeet.likes.remove(request.user)
+        else:
+            yeet.likes.add(request.user)
+        return redirect(request.META.get("HTTP_REFERER"))
+
+    else: 
         messages.success(request, ("You have to be logged in."))
         return redirect('home')

@@ -12,6 +12,11 @@ class Yeet(models.Model):
         )
     body = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField(User, related_name="yeet_like", blank=True)
+
+    #Count likes
+    def number_of_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return(

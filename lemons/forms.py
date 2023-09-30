@@ -24,7 +24,7 @@ class YeetForm(forms.ModelForm):
     
     class Meta:
         model = Yeet
-        exclude = ("user",)
+        exclude = ("user", "likes", )
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))

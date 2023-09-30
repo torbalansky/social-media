@@ -25,7 +25,16 @@
                           <small class="text-muted">
                               ({{ yeet.created_at}}) By 
                               @{{ yeet.user.username }}
-                
+                            - {{ yeet.number_of_likes }} Likes - {{user}}
+                            {% if user in yeet.likes.all %}
+                            <a href="{% url 'yeet_like' yeet.id %}">
+                                <i class="fa-solid fa-bell" style="color: rgb(85, 0, 76)"></i>
+                            </a>
+                            {% else %}
+                            <a href="{% url 'yeet_like' yeet.id %}">
+                                <i class="fa-regular fa-bell" style="color: rgb(85, 0, 76)"></i>
+                            </a>
+                            {% endif %}
                           </small>
                         </div><br/><br/>
                 
