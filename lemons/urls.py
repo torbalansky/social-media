@@ -12,4 +12,7 @@ urlpatterns = [
     path('yeet_like/<int:pk>', views.yeet_like, name='yeet_like'),
     path('yeet_share/<int:pk>', views.yeet_share, name='yeet_share'),
     path('unfollow/<int:pk>', views.unfollow, name='unfollow'),
+    path('follow/<int:pk>', views.follow, name='follow'),
+    path('delete_yeet/<int:pk>', views.delete_yeet, name='delete_yeet'),
+    path('edit_yeet/<int:pk>', views.edit_yeet, name='edit_yeet'),
 ]

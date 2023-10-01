@@ -34,10 +34,24 @@ def profile_list(request):
 
 def unfollow(request, pk):
     if request.user.is_authenticated:
+        # Get the profile to unfollow.
         profile = Profile.objects.get(user_id=pk)
+        #Unfollow the user
         request.user.profile.follows.remove(profile)
         request.user.profile.save()
         messages.success(request, (f"You successfully unfollowed {profile.user.username}"))
+        return redirect(request.META.get("HTTP_REFERER"))
+
+    else:
+        messages.success(request, ("You must be logged in to access this."))
+        return redirect('home')
+    
+def follow(request, pk):
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user_id=pk)
+        request.user.profile.follows.add(profile)
+        request.user.profile.save()
+        messages.success(request, (f"You successfully followed {profile.user.username}"))
         return redirect(request.META.get("HTTP_REFERER"))
 
     else:
@@ -52,12 +66,15 @@ def profile(request, pk):
 
         # Post form
         if request.method == "POST":
+            # Get current user
             current_user_profile = request.user.profile
+            # Get form data
             action = request.POST['follow']
             if action == "unfollow":
                 current_user_profile.follows.remove(profile)
             elif action == "follow":
                 current_user_profile.follows.add(profile)
+            # Save the user
             current_user_profile.save()
 
         return render(request, "profile.html", {"profile":profile, "yeets":yeets})
@@ -144,3 +161,43 @@ def yeet_share(request, pk):
         else: 
             messages.success(request, ("That yeet does not exist."))
             return redirect('home')
+        
+def delete_yeet(request, pk):
+	if request.user.is_authenticated:
+		yeet = get_object_or_404(Yeet, id=pk)
+		# Check if you own the yeet
+		if request.user.username == yeet.user.username:
+			# Delete the yeet
+			yeet.delete()
+			
+			messages.success(request, ("The yeet has been deleted."))
+			return redirect(request.META.get("HTTP_REFERER"))	
+		else:
+			messages.success(request, ("This yeet is not yours"))
+			return redirect('home')
+
+	else:
+		messages.success(request, ("Login to continue."))
+		return redirect(request.META.get("HTTP_REFERER"))
+     
+def edit_yeet(request, pk):
+    if request.user.is_authenticated:
+        yeet = get_object_or_404(Yeet, id=pk)
+        # Check if you own the yeet
+        if request.user.username == yeet.user.username:
+            form = YeetForm(request.POST or None, instance=yeet)
+            if request.method == "POST":
+                if form.is_valid():
+                    yeet = form.save(commit=False)
+                    yeet.user = request.user
+                    yeet.save()
+                    messages.success(request, ("Your yeet has been updated."))
+                    return redirect('home')
+            else:
+                return render(request, "edit_yeet.html", {'form': form, 'yeet': yeet})
+        else:
+            messages.success(request, ("This yeet is not yours."))
+            return redirect('home')
+    else:
+        messages.success(request, ("You have to be logged in."))
+        return redirect('home')
