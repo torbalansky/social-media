@@ -19,13 +19,13 @@
                                     - {{ yeet.number_of_likes }} Likes -
                                     {% if user in yeet.likes.all %}
                                     <a href="{% url 'yeet_like' yeet.id %}">
-                                        <i class="fa-solid fa-bell" style="color: rgb(85, 0, 76)"></i>
-                                    </a>
+                                        <i class="fa-solid fa-bell" style="color: rgb(85, 0, 76)"></i></a>
                                     {% else %}
                                     <a href="{% url 'yeet_like' yeet.id %}">
-                                        <i class="fa-regular fa-bell" style="color: rgb(85, 0, 76)"></i>
-                                    </a>
+                                        <i class="fa-regular fa-bell" style="color: rgb(85, 0, 76)"></i></a>
                                     {% endif %}
+                                    <a href="{% url 'yeet_share' yeet.id %}">
+                                        <i class="fa-solid fa-share" style="padding: 5px"></i></a>
                                 </small>
                             </div>
                         </div>
@@ -38,12 +38,43 @@
                     <img src="{{ profile.profile_image.url }}" style="width: 200px; margin-bottom: 20px;">
                     <br/>
                     {% endif %}
+                    
+                    {% if profile.homepage_link %}
+                    <a href="{{ profile.homepage_link }}"><i class="fa-solid fa-link" style="padding: 5px"></i></a>
+
+                    {% endif %}
+
+                    {% if profile.facebook_link %}
+                    <a href="{{ profile.facebook_link }}"><i class="fa-brands fa-facebook" style="padding: 5px"></i></a>
+
+                    {% endif %}
+
+                    {% if profile.instagram_link %}
+                    <a href="{{ profile.instagram_link }}"><i class="fa-brands fa-instagram" style="padding: 5px"></i></a>
+
+                    {% endif %}
+
+                    <a href="{% if profile.linkedin_link %}"><i class="fa-brands fa-linkedin" style="padding: 5px"></i></a>
+                    {{profile.linkedin_link}}
+
+                    {% endif %}
+
+                    <p class="bio" style="font-size: 14px; text-align:justify; padding: 5px; margin-top: 10px;">
+                    {%if profile.profile_bio %}
+
+                    {{profile.profile_bio}}
+
+                    {% endif %}
+                    </p>
+
 					<div class="card">
 						<h5 class="card-header">Follows</h5>
 						<div class="card-body">
 							<p class="card-text">
 								{% for following in profile.follows.all %}
-									<a href="{% url 'profile' following.user.id %}">@{{ following }}</a><br/>
+									<a href="{% url 'profile' following.user.id %}">@{{ following }}</a>
+                                    <a href="{% url 'unfollow' following.user.id %}"><i class="fa-solid fa-delete-left small" style="color:gray" alt="unfollow"></i></a>
+                                    <br/>
 								{% endfor %}
 							</p>
 						</div>

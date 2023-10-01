@@ -32,6 +32,18 @@ def profile_list(request):
         messages.success(request, ("You must be logged in to access this."))
         return redirect('home')
 
+def unfollow(request, pk):
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user_id=pk)
+        request.user.profile.follows.remove(profile)
+        request.user.profile.save()
+        messages.success(request, (f"You successfully unfollowed {profile.user.username}"))
+        return redirect(request.META.get("HTTP_REFERER"))
+
+    else:
+        messages.success(request, ("You must be logged in to access this."))
+        return redirect('home')
+
 def profile(request, pk):
     if request.user.is_authenticated:
         profile = Profile.objects.get(user_id=pk)
@@ -76,8 +88,9 @@ def logout_user(request):
     return redirect('home')
 
 def register_user(request):
-    form = SignUpForm(request.POST)  # Initialize the form here
+    form = SignUpForm()  # Initialize the form here
     if request.method == "POST":
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data['username']
@@ -86,7 +99,7 @@ def register_user(request):
             # Login user
             user = authenticate(username=username, password=password)
             login(request, user)
-            messages.success(request, ("You are logged in."))
+            messages.success(request, ("You have successfully registered!"))
             return redirect('home')
     return render(request, "register.html", {'form': form})
 
@@ -94,8 +107,10 @@ def update_user(request):
     if request.user.is_authenticated:
         current_user = User.objects.get(id=request.user.id)
         profile_user = Profile.objects.get(user__id=request.user.id)
+
         user_form = SignUpForm(request.POST or None, request.FILES or None, instance=current_user)
         profile_form = ProfilePictureForm(request.POST or None, request.FILES or None, instance=profile_user)
+
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
@@ -120,3 +135,12 @@ def yeet_like(request, pk):
     else: 
         messages.success(request, ("You have to be logged in."))
         return redirect('home')
+    
+def yeet_share(request, pk):
+        yeet = get_object_or_404(Yeet, id=pk)
+        if yeet:
+            return render(request, "share_yeet.html", {'yeet':yeet})
+  
+        else: 
+            messages.success(request, ("That yeet does not exist."))
+            return redirect('home')

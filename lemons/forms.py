@@ -6,10 +6,15 @@ from django.contrib.auth.models import User
 #Profile additions
 class ProfilePictureForm(forms.ModelForm):
     profile_image = forms.ImageField(label="Profile Picture")
+    profile_bio = forms.CharField(label="Profile Bio", widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Profile Biography'}))
+    homepage_link = forms.CharField(label="Homepage Link", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Homepage Link'}))
+    facebook_link = forms.CharField(label="Facebook Link", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Facebook Link'}))
+    instagram_link =  forms.CharField(label="Instagram Link", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Instagram Link'}))
+
 
     class Meta:
         model= Profile
-        fields = ('profile_image', )
+        fields = ('profile_image', 'profile_bio', 'homepage_link', 'facebook_link', 'instagram_link', )
 
 class YeetForm(forms.ModelForm):
     body = forms.CharField(required=True,
@@ -37,7 +42,7 @@ class SignUpForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
-
+        
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['username'].widget.attrs['placeholder'] = 'User Name'
         self.fields['username'].label = ''

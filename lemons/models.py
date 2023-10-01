@@ -36,11 +36,17 @@ class Profile(models.Model):
     date_modified = models.DateTimeField(User, auto_now=True)
     profile_image = models.ImageField(null=True, blank=True, upload_to="images/")
     
+    profile_bio = models.CharField(null=True, blank=True, max_length=300)
+    homepage_link = models.CharField(null=True, blank=True, max_length=150)
+    facebook_link = models.CharField(null=True, blank=True, max_length=150)
+    instagram_link = models.CharField(null=True, blank=True, max_length=150) 
+    linkedin_link = models.CharField(null=True, blank=True, max_length=150)
+
     def __str__(self):
         return self.user.username
 
 #Create profile when signUp
-@receiver(post_save, sender=User)
+# another way would be: receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:
         user_profile = Profile(user=instance)
@@ -48,5 +54,5 @@ def create_profile(sender, instance, created, **kwargs):
         #User follow himself
         user_profile.follows.set([instance.profile.id])
         user_profile.save()
-#another way would be:
-#post_save.connect(create_profile, sender=User)
+
+post_save.connect(create_profile, sender=User)

@@ -9,5 +9,7 @@ urlpatterns = [
     path('logout', views.logout_user, name='logout'),
     path('register/', views.register_user, name='register'),
     path('update_user/', views.update_user, name='update_user'),
-    path('yeet_like/<int:pk>', views.yeet_like, name='yeet_like')
+    path('yeet_like/<int:pk>', views.yeet_like, name='yeet_like'),
+    path('yeet_share/<int:pk>', views.yeet_share, name='yeet_share'),
+    path('unfollow/<int:pk>', views.unfollow, name='unfollow'),
 ]
