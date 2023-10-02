@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container text-center" style="margin-top: 50px;">
+    <h1>Search User</h1>
+
+    <div class="text-center"> 
+        <form method="POST" style="display: inline-block; margin-bottom: 30px;"> 
+            {% csrf_token %}
+            <input type="input" class="form-control" placeholder="Search User" name="search" style="width: 400px; margin: 10px;">
+            <button type="submit" class="btn btn-dark" style="margin: 10px; border:2px solid green">Search</button>
+        </form>
+    </div>
+
+    {% if search %}
+        <h3>You searched for: {{ search }}</h3>
+    {% endif %}
+
+    <div class="text-center" style="display: flex; justify-content: center;"> 
+        {% if searched %}
+            {% for result in searched %}
+            <div class="card mb-3" style="max-width: 540px; margin: 10px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        {% if result.profile.profile_image %}
+                        <img src="{{ result.profile.profile_image.url }}" alt="{{ result.profile.user.username }}" style="width: 150px; height: 150px; border-radius: 5px;">
+                        {% else %}
+                        <img src="{% static 'images/user.png' %}" class="img-fluid rounded-start" alt="Profile Image">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ result.profile.user.username }}</h5>
+                            <p class="card-text"><a href="{% url 'profile' result.profile.user.id %}">@{{ result.profile.user.username|lower }}</a></p>
+                            <p class="card-text"><small class="text-body-secondary">Last Updated: {{ result.profile.date_modified }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            {% if searched == None %}
+            {% else %}
+            <p style="margin: 10px;">Sorry, no such user. Please try again.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

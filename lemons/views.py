@@ -201,3 +201,12 @@ def edit_yeet(request, pk):
     else:
         messages.success(request, ("You have to be logged in."))
         return redirect('home')
+    
+def search(request):
+    if request.method == "POST":
+        search = request.POST['search']
+        searched = User.objects.filter(username__contains = search)
+
+        return render(request, 'search.html', {'search':search, 'searched':searched})
+    else:
+        return render(request, 'search.html', {})

@@ -1,0 +1,140 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(46, 45, 46); 
+    color: white; 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.content-container {
+    margin: 0;
+    width: 100%;
+    background-color:rgb(46, 45, 46);
+    color: white; 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.nav-item {
+    list-style: none;
+}
+
+.navbar {
+    background-color: rgb(0, 0, 0);
+}
+
+.navbar-brand img {
+    width: 30px;
+    height: 30px;
+}
+
+.navbar-toggler-icon {
+    background-color: rgb(67, 27, 69);
+}
+
+.navbar-nav .nav-link {
+    color: rgb(170, 167, 255);
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+}
+
+.btn.btn-outline-success {
+    color: white;
+}
+
+.alert.alert-dark {
+    margin: 20px;
+    border: none;
+    text-align: center;
+    padding: 10px; 
+}
+
+.alert.alert-dark img.rounded-circle {
+    width: 50px;
+    height: 50px;
+}
+
+.alert.alert-dark .col-11 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.secondary_text {
+    font-size: 14px;
+    color:rgb(223, 223, 223)
+}
+
+.fa-solid.fa-bell,
+.fa-regular.fa-bell,
+.fa-solid.fa-share {
+    margin: 5px;
+    color: rgb(170, 167, 255);
+}
+
+.btn.btn-primary {
+    margin-top: 10px; 
+    width: 100px;
+}
+
+#form-yeet {
+    margin-top: 70px;
+}
+
+.alert.alert-dark {
+    background-color: rgb(70, 70, 70);
+    color: white;
+}
+
+@media (max-width: 768px) {
+
+    .alert.alert-dark .col-11 {
+        font-size: 16px;
+    }
+    
+    .alert.alert-dark .text-muted {
+        font-size: 12px;
+    }
+}
+
+.img-fluid, .profile_img {
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.card-title {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.profile_list {
+   width: 600px;
+}
+
+.profile_list_title {
+    padding: 20px;
+    margin-left: 100px;
+}
+
+@media (max-width: 768px) {
+    .img-fluid, .profile_img {
+        width: 100px; 
+        height: 100px; 
+        margin: 5px; 
+    }
+
+    .card-title {
+        font-size: 24px; 
+    }
+
+    .profile_list {
+        width: 100%; 
+    }
+
+    .profile_list_title {
+        padding: 10px; 
+        margin-left: 0; 
+    }
+}

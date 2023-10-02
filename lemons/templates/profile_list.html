@@ -3,17 +3,17 @@
 
 {% block content %}
 
-<h1>Profiles</h1>
+<h1 class="profile_list_title">Profiles:</h1>
 
 {% if profiles %}
     {% for profile in profiles %}
-
-    <div class="card mb-3" style="max-width: 540px;">
+  <div class="container text-center">
+    <div class="card mb-3 profile_list">
         <div class="row g-0">
           <div class="col-md-4">
 
             {% if profile.profile_image %}
-            <img src="{{profile.profile_image.url}}" alt="{{profile.user.username}}" style="width: 150px; height: 150px; border-radius: 5px; margin: 10px;">
+            <img src="{{profile.profile_image.url}}" alt="{{profile.user.username}}" class="profile_img">
            
             {% else %}
 
@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-
+  </div>
     {% endfor %}
 
 {% endif %}
