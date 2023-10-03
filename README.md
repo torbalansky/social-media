@@ -11,31 +11,40 @@ This is a Django-based social media clone application that allows users to post 
 - Yeet liking and sharing
 - User search functionality
 
-## Installation
+## Technologies Used
 
-### Clone the repository to your local machine:
+- Python
+- Django
+- HTML/CSS
+- Bootstrap
+- SQLite (by default, but can be changed to another database)
 
-   git clone <https://github.com/torbalansky/social-media-clone.git>
-   cd social-media-clone
+## Dependencies
 
-### Create a virtual environment
+This project relies on several Python packages. You can install them using the following steps:
 
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use venv\Scripts\activate
+### Installation
 
-### Install the dependencies
+```shell
+# Clone the repository to your local machine:
+git clone https://github.com/torbalansky/social-media-clone.git
+cd social-media-clone
 
-    pip install -r requirements.txt
+# Create a virtual environment:
+python -m venv venv
+source venv/bin/activate  # On Windows, use venv\Scripts\activate
 
-### Apply database migrations
+# Install the required dependencies:
+pip install -r requirements.txt
 
-    python manage.py migrate
+# Apply database migrations:
+python manage.py migrate
 
-### Create super user
+# Create a superuser for admin access (optional):
+python manage.py createsuperuser
 
-    python manage.py createsuperuser
-
-### Start the dev server
-
-    python manage.py runserver
+# Start the development server:
+python manage.py runserver
+```
+These instructions will set up your local development environment for the Social Media Clone App.
 
