@@ -41,6 +41,7 @@ class Profile(models.Model):
     facebook_link = models.CharField(null=True, blank=True, max_length=150)
     instagram_link = models.CharField(null=True, blank=True, max_length=150) 
     linkedin_link = models.CharField(null=True, blank=True, max_length=150)
+    github_link = models.CharField(null=True, blank=True, max_length=150)
 
     def __str__(self):
         return self.user.username

@@ -67,7 +67,9 @@ html, body {
 
 .fa-solid.fa-bell,
 .fa-regular.fa-bell,
-.fa-solid.fa-share {
+.fa-solid.fa-share,
+.fa-solid.fa-pen-to-square,
+.fa-solid.fa-trash {
     margin: 5px;
     color: rgb(170, 167, 255);
 }
@@ -98,10 +100,10 @@ html, body {
 }
 
 .img-fluid, .profile_img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 5px;
-    margin: 10px;
+    margin: 20px;
 }
 
 .card-title {
@@ -109,13 +111,8 @@ html, body {
     font-weight: bold;
 }
 
-.profile_list {
-   width: 600px;
-}
-
 .profile_list_title {
     padding: 20px;
-    margin-left: 100px;
 }
 
 @media (max-width: 768px) {
@@ -138,3 +135,100 @@ html, body {
         margin-left: 0; 
     }
 }
+
+.card.profile_card {
+    background-color: rgb(70, 70, 70);
+    color: white;
+}
+
+.card.mb-3.profile_list {
+    background-color: rgb(101, 90, 111);
+    color: white;
+}
+
+.profile_image {
+ width: 150px;
+ height: 150px;
+ border-radius: 50%;
+}
+
+.bio {
+    font-size: 14px; 
+    text-align: justify; 
+    padding: 5px; 
+    margin-top: 10px;
+}
+
+.custom-login-form,
+.custom-login-btn {
+    width: 250px !important;
+}
+
+.login-title {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.search-form, 
+.profile_list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; 
+    -webkit-box-orient: vertical; 
+    -webkit-box-direction: normal; 
+        -ms-flex-direction: column; 
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.search-btn {
+    margin-top: 10px;
+}
+
+.search-title {
+    padding-top: 20px;
+}
+
+.search-result, .profile-list-container {
+    display: -ms-grid;
+    display: grid; 
+    -ms-grid-columns: 1fr 1fr; 
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px;
+}
+
+.search-card {
+    max-width: 500px; 
+    margin: 20px;
+}
+
+.img-fluid.rounded-start {
+    width: 100px; 
+    height: 100px;
+}
+
+@media screen  and ( max-width: 768px) {
+    .search-result, 
+    .profile-list-container {
+        display: -ms-grid;
+        display: grid;
+        -ms-grid-columns: 1fr; 
+        grid-template-columns: 1fr;
+        margin: 10px;
+    }
+
+    .search-card {
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+    }
+}
+    

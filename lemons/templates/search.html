@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container text-center" style="margin-top: 50px;">
-    <h1>Search User</h1>
+<div class="container text-center">
+    <h2 class="search-title">Search User</h2>
 
-    <div class="text-center"> 
-        <form method="POST" style="display: inline-block; margin-bottom: 30px;"> 
+    <div class="text-center search-form"> 
+        <form method="POST"> 
             {% csrf_token %}
-            <input type="input" class="form-control" placeholder="Search User" name="search" style="width: 400px; margin: 10px;">
-            <button type="submit" class="btn btn-dark" style="margin: 10px; border:2px solid green">Search</button>
+        <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+            <input type="input" class="form-control search-input" placeholder="Search User" name="search">
+        </div>
+            <button type="submit" class="btn btn-success search-btn">Search</button>
         </form>
     </div>
 
@@ -16,14 +19,14 @@
         <h3>You searched for: {{ search }}</h3>
     {% endif %}
 
-    <div class="text-center" style="display: flex; justify-content: center;"> 
+    <div class="search-result"> 
         {% if searched %}
             {% for result in searched %}
-            <div class="card mb-3" style="max-width: 540px; margin: 10px;">
+            <div class="card mb-3 search-card">
                 <div class="row g-0">
                     <div class="col-md-4">
                         {% if result.profile.profile_image %}
-                        <img src="{{ result.profile.profile_image.url }}" alt="{{ result.profile.user.username }}" style="width: 150px; height: 150px; border-radius: 5px;">
+                        <img src="{{ result.profile.profile_image.url }}" alt="{{ result.profile.user.username }}" class="img-fluid rounded-start">
                         {% else %}
                         <img src="{% static 'images/user.png' %}" class="img-fluid rounded-start" alt="Profile Image">
                         {% endif %}
@@ -41,7 +44,7 @@
         {% else %}
             {% if searched == None %}
             {% else %}
-            <p style="margin: 10px;">Sorry, no such user. Please try again.</p>
+            <p>Sorry, no such user. Please try again.</p>
             {% endif %}
         {% endif %}
     </div>

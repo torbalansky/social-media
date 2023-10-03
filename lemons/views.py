@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Profile, Yeet
-from .forms import YeetForm, SignUpForm, ProfilePictureForm
+from .forms import YeetForm, SignUpForm, ProfilePictureForm, UserUpdateForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
@@ -124,18 +124,22 @@ def update_user(request):
     if request.user.is_authenticated:
         current_user = User.objects.get(id=request.user.id)
         profile_user = Profile.objects.get(user__id=request.user.id)
+        if request.method == "POST":
+            user_form = UserUpdateForm(request.POST, instance=current_user)
+            profile_form = ProfilePictureForm(request.POST, request.FILES, instance=profile_user)
 
-        user_form = SignUpForm(request.POST or None, request.FILES or None, instance=current_user)
-        profile_form = ProfilePictureForm(request.POST or None, request.FILES or None, instance=profile_user)
-
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            login(request, current_user)    
-            messages.success(request, ("Your profile has been updated."))
-            return redirect('home')
-        
-        return render(request, "update_user.html", {'user_form':user_form, 'profile_form':profile_form})
+            if user_form.is_valid() and profile_form.is_valid():
+                user_form.save()
+                profile_form.save()
+                login(request, current_user)    
+                messages.success(request, ("Your profile has been updated."))
+                return redirect('home')
+            else:
+                messages.error(request, "There was an error updating your profile. Try again.")
+        else:
+            user_form = UserUpdateForm(instance=current_user)
+            profile_form = ProfilePictureForm(instance=profile_user)
+            return render(request, "update_user.html", {'user_form':user_form, 'profile_form':profile_form})
     else:
         messages.success(request, ("You have to be logged in."))
         return redirect('home')
