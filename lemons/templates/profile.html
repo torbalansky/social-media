@@ -1,131 +1,124 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 	{% if profile %}
+
 		<div class="container text-center">
+            <h1>{{ profile.user.username }}'s Profile</h1><br/>
 			<div class="row">
-				<div class="col-8">
-					<h1 class="profile_list_title">{{ profile.user.username }}'s Profile</h1><br/>
-                    {% if yeets %}
-                        {% for yeet in yeets %}
-                    
-                        <div class="card profile_card">
-                            <div class="card-body">
-                                <strong>{{yeet.body}}<br/></strong>
-                                <small class="txt-muted">
-                                    {{yeet.created_at}} by
-                                    {{yeet.user.username}}
-                                    - {{ yeet.number_of_likes }} Likes -
-                                    {% if user in yeet.likes.all %}
-                                    <a href="{% url 'yeet_like' yeet.id %}">
-                                        <i class="fa-solid fa-bell"></i></a>
-                                    {% else %}
-                                    <a href="{% url 'yeet_like' yeet.id %}">
-                                        <i class="fa-regular fa-bell" ></i></a>
-                                    {% endif %}
-                                    <a href="{% url 'yeet_share' yeet.id %}">
-                                        <i class="fa-solid fa-share"></i></a>
-                                    {% if request.user.username == profile.user.username %}
-                                    <a href="{% url 'edit_yeet' yeet.id %}">
-                                        <i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="{% url 'delete_yeet' yeet.id %}">
-                                        <i class="fa-solid fa-trash"></i></a>
-                                   {% endif %}
-                                </small>
-                            </div>
-                        </div>
-                        <br/>
-                        {% endfor %}
-                    {% endif %}
-				</div>
-				<div class="col-4" style="margin-top: 50px;">
+                <div class="col-md-4">
                     {% if profile.profile_image %}
-                    <img src="{{ profile.profile_image.url }}" class="profile_image">
-                    <br/>
+                        <img src="{{ profile.profile_image.url }}" class="profile_image">
+                        <br/>
                     {% endif %}
                     
                     {% if profile.homepage_link %}
-                    <a href="{{ profile.homepage_link }}"><i class="fa-solid fa-link" style="padding: 5px"></i></a>
-
+                        <a href="{{ profile.homepage_link }}"><i class="fa-solid fa-link"></i></a>
                     {% endif %}
 
                     {% if profile.facebook_link %}
-                    <a href="{{ profile.facebook_link }}"><i class="fa-brands fa-facebook" style="padding: 5px"></i></a>
-
+                        <a href="{{ profile.facebook_link }}"><i class="fa-brands fa-facebook"></i></a>
                     {% endif %}
 
                     {% if profile.instagram_link %}
-                    <a href="{{ profile.instagram_link }}"><i class="fa-brands fa-instagram" style="padding: 5px"></i></a>
-
+                        <a href="{{ profile.instagram_link }}"><i class="fa-brands fa-instagram"></i></a>
                     {% endif %}
 
                     {% if profile.github_link %}
-                    <a href="{{ profile.github_link }}"><i class="fa-brands fa-github" style="padding: 5px"></i></a>
-
+                        <a href="{{ profile.github_link }}"><i class="fa-brands fa-github"></i></a>
                     {% endif %}
 
                     {% if profile.linkedin_link %}
-                    <a href="{{ profile.linkedin_link }}"><i class="fa-brands fa-linkedin" style="padding: 5px"></i></a>
-
+                        <a href="{{ profile.linkedin_link }}"><i class="fa-brands fa-linkedin"></i></a>
                     {% endif %}
 
                     <p class="bio">
-                    {% if profile.profile_bio %}
-
-                    {{ profile.profile_bio }}
-
-                    {% endif %}
+                        {% if profile.profile_bio %}
+                            {{ profile.profile_bio }}
+                        {% endif %}
                     </p>
 
-					<div class="card">
-						<h5 class="card-header">Follows</h5>
-						<div class="card-body">
-							<p class="card-text">
-								{% for following in profile.follows.all %}
-									<a href="{% url 'profile' following.user.id %}">@{{ following }}</a>
-                                    <a href="{% url 'unfollow' following.user.id %}"><i class="fa-solid fa-heart-circle-minus" style="color:gray; padding: 5px;" alt="unfollow"></i></a>
+                    <div class="card">
+                        <h5 class="card-header">Follows</h5>
+                        <div class="card-body">
+                            <p class="card-text">
+                                {% for following in profile.follows.all %}
+                                    <a href="{% url 'profile' following.user.id %}">@{{ following }}</a>
+                                    <a href="{% url 'unfollow' following.user.id %}"><i class="fa-solid fa-heart-circle-minus" alt="unfollow"></i></a>
                                     <br/>
-								{% endfor %}
-							</p>
-						</div>
-					</div>
-					<br/><br/>
-					<div class="card">
-						<h5 class="card-header">Followed By</h5>
-						<div class="card-body">
-							<p class="card-text">
-								{% for following in profile.followed_by.all %}
-									<a href="{% url 'profile' following.user.id %}">@{{ following }}</a>
+                                {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                    <br/><br/>
+                    <div class="card">
+                        <h5 class="card-header">Followed By</h5>
+                        <div class="card-body">
+                            <p class="card-text">
+                                {% for following in profile.followed_by.all %}
+                                    <a href="{% url 'profile' following.user.id %}">@{{ following }}</a>
                                     
                                     {% if following in profile.follows.all %}
-                                    <a href="{% url 'unfollow' following.user.id %}"><i class="fa-solid fa-heart-circle-minus" style="color:gray; padding: 5px;"></i></a>
+                                        <a href="{% url 'unfollow' following.user.id %}"><i class="fa-solid fa-heart-circle-minus"></i></a>
                                     {% else %}
-                                    <a href="{% url 'follow' following.user.id %}"><i class="fa-solid fa-heart-circle-plus" style="color:red; padding: 5px;"></i></a>
+                                        <a href="{% url 'follow' following.user.id %}"><i class="fa-solid fa-heart-circle-plus"></i></a>
                                     {% endif %}
                                     <br/>
-								{% endfor %}
-							</p>
-						</div>
-					</div>
+                                {% endfor %}
+                            </p>
+                        </div>
+                    </div>
                     <br/>
+                <div class="profile-buttons">
                     <form method="POST">
                         {% csrf_token %}
                         {% if profile in user.profile.follows.all %}
-                            <button class="btn btn-outline-warning" name="follow" value="unfollow" type="submit">
+                            <button class="btn btn-danger" name="follow" value="unfollow" type="submit">
                                 Unfollow @{{profile.user.username|lower}}
                             </button>
                         {% else %}
-                            <button class="btn btn-outline-success" name="follow" value="follow" type="submit">
+                            <button class="btn btn-success" name="follow" value="follow" type="submit">
                                 Follow @{{profile.user.username|lower}}
                             </button>
-
-
                         {% endif %}
                     </form>
-                        <br/>
-                        {% if request.user.id == profile.user.id %}
-                      <a href="{% url 'update_user' %}" class="btn btn-warning" style="margin-bottom: 20px; width: 150px;">Update Profile</a>
-                        {% endif %}
+                    {% if request.user.id == profile.user.id %}
+                        <a href="{% url 'update_user' %}" class="btn btn-primary update-profile">Update Profile</a>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    {% if yeets %}
+                        {% for yeet in yeets %}
+                            <div class="card profile_card">
+                                <div class="card-body">
+                                    <strong>{{yeet.body}}<br/></strong>
+                                    <small class="txt-muted">
+                                        {{yeet.created_at}} by
+                                        {{yeet.user.username}}
+                                        - {{ yeet.number_of_likes }} Likes -
+                                        {% if user in yeet.likes.all %}
+                                            <a href="{% url 'yeet_like' yeet.id %}">
+                                                <i class="fa-solid fa-bell"></i></a>
+                                        {% else %}
+                                            <a href="{% url 'yeet_like' yeet.id %}">
+                                                <i class="fa-regular fa-bell" ></i></a>
+                                        {% endif %}
+                                            <a href="{% url 'yeet_share' yeet.id %}">
+                                                <i class="fa-solid fa-share"></i></a>
+                                        {% if request.user.username == profile.user.username %}
+                                            <a href="{% url 'edit_yeet' yeet.id %}">
+                                                <i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="{% url 'delete_yeet' yeet.id %}">
+                                                <i class="fa-solid fa-trash"></i></a>
+                                        {% endif %}
+                                    </small>
+                                </div>
+                            </div>
+                            <br/>
+                        {% endfor %}
+                    {% endif %}
                 </div>
 			</div>
 		</div>

@@ -39,8 +39,35 @@ html, body {
     font-weight: bold;
 }
 
-.btn.btn-outline-success {
-    color: white;
+.profile-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+}
+
+.btn.btn-primary.update-profile {
+    width: 140px;
+}
+
+.fa-solid.fa-link,
+.fa-brands.fa-facebook,
+.fa-brands.fa-instagram,
+.fa-brands.fa-github,
+.fa-brands.fa-linkedin {
+    padding: 5px;
+    color: aqua;
+}
+
+.fa-solid.fa-heart-circle-minus {
+    padding: 5px;
+    color: gray;
+}
+
+.fa-solid.fa-heart-circle-plus {
+    padding: 5px;
+    color: red;
 }
 
 .alert.alert-dark {
@@ -67,15 +94,18 @@ html, body {
 
 .fa-solid.fa-bell,
 .fa-regular.fa-bell,
-.fa-solid.fa-share,
+.fa-solid.fa-share {
+    margin: 5px;
+    color: rgb(214, 212, 253);
+}
+
 .fa-solid.fa-pen-to-square,
 .fa-solid.fa-trash {
     margin: 5px;
-    color: rgb(170, 167, 255);
+    color: rgb(246, 215, 215);
 }
 
 .btn.btn-primary {
-    margin-top: 10px; 
     width: 100px;
 }
 
@@ -113,6 +143,13 @@ html, body {
 
 .profile_list_title {
     padding: 20px;
+    margin-left: 50px;
+}
+
+.profile-buttons {
+    display: flex;
+    flex-direction: row;
+
 }
 
 @media (max-width: 768px) {
