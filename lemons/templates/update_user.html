@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="col-md-6 offset-md-3">
+<div class="col-md-6 offset-md-3 text-center py-2">
     
-    <h1 class="profile_list_title">Update Info:</h1>
+    <h1>Update Info:</h1>
     <form method="POST" action="" enctype="mutlipart/form-data">
         {%  csrf_token %}
         {{ user_form.as_p }}

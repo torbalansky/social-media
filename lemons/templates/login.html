@@ -2,27 +2,32 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-    You are already Logged In!
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-    </button>
-  </div>
-{% else %}
-    <div class="col-md-4 offset-md-3 custom-login-form">
-        <h2 class="login-title">Login</h2>
-        <form method="POST" action="{% url 'login' %}">
-            {%  csrf_token %}
-            <div class="mb-3 input-group">
-              <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
-              <input type="text" class="form-control" name="username" placeholder="Your email...">
-            </div>
-            <div class="mb-3 input-group">
-              <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-              <input type="password" class="form-control" name="password" placeholder="Your password..">
-            </div>
-               <button type="submit" class="btn btn-primary custom-login-btn">LOGIN</button>
-          </form>
+
+
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      You are already Logged In!
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+  {% else %}
+  <div class="container text-center py-2">
+    <div class="row justify-content-center">
+      <div class="col-12 custom-login-form">
+          <h2 >Login</h2>
+          <form method="POST" action="{% url 'login' %}">
+              {%  csrf_token %}
+              <div class="mb-3 input-group">
+                <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
+                <input type="text" class="form-control" name="username" placeholder="Your email...">
+              </div>
+              <div class="mb-3 input-group">
+                <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                <input type="password" class="form-control" name="password" placeholder="Your password..">
+              </div>
+                <button type="submit" class="btn btn-primary custom-login-btn">LOGIN</button>
+            </form>
+        </div>
+    </div>
+  </div>
 
 {% endif %}
 {% endblock %}

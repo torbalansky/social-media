@@ -105,13 +105,29 @@ html, body {
     color: rgb(246, 215, 215);
 }
 
-.btn.btn-primary {
-    width: 100px;
+.btn.btn-primary.register {
+    width: 275px;
+    margin-top: 20px;
 }
 
-#form-yeet {
-    margin-top: 70px;
+.btn.btn-primary {
+    width: 200px;
 }
+
+.yeet-text {
+    max-width: 100%; 
+    word-wrap: break-word;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .yeet-text {
+        font-size: 16px;
+        margin: 10px;
+        padding: 20px;
+    }
+}
+    
 
 .alert.alert-dark {
     background-color: rgb(70, 70, 70);
@@ -141,15 +157,9 @@ html, body {
     font-weight: bold;
 }
 
-.profile_list_title {
-    padding: 20px;
-    margin-left: 50px;
-}
-
 .profile-buttons {
     display: flex;
     flex-direction: row;
-
 }
 
 @media (max-width: 768px) {
@@ -196,14 +206,8 @@ html, body {
     margin-top: 10px;
 }
 
-.custom-login-form,
-.custom-login-btn {
-    width: 250px !important;
-}
-
-.login-title {
-    padding-top: 20px;
-    text-align: center;
+.custom-login-form {
+    width: 300px !important;
 }
 
 .search-form, 
@@ -229,7 +233,8 @@ html, body {
     margin-top: 10px;
 }
 
-.search-title {
+.search-title,
+.register-title {
     padding-top: 20px;
 }
 
