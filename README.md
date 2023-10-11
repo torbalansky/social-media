@@ -1,5 +1,6 @@
 # Social Media Clone App
-This is a Django-based social media clone application that is currently under development. It is an application that allows users to post "Yeets" (similar to tweets) and follow other users.
+
+This is a Django-based social media clone application currently under development, allowing users to post 'Yeets' (similar to tweets) and follow other users
 
 You can visit it here: [Social Media Clone App](https://django-social-media-clone.onrender.com/)
 
